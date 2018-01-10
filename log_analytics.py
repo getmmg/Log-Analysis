@@ -10,15 +10,12 @@ def run_query(query):
     Returns:
     All rows returned from query
     '''
-    try:
-        db = psycopg2.connect("dbname=news")
-        c = db.cursor()
-        c.execute(query)
-        rows = c.fetchall()
-        db.close()
-        return rows
-    except:
-        print("Unable to fetch data from DB")
+    db = psycopg2.connect("dbname=news")
+    c = db.cursor()
+    c.execute(query)
+    rows = c.fetchall()
+    db.close()
+    return rows
 
 
 def print_results(question, results, result_type):
@@ -32,8 +29,8 @@ def print_results(question, results, result_type):
     None
     '''
     index = 0
-    print ("Question : {}".format(question))
-    print "Answer :"
+    print("Question : {}".format(question))
+    print("Answer :")
     for row in results:
         index += 1
         print('{}. {}\t - {} {}'.format(
@@ -42,6 +39,7 @@ def print_results(question, results, result_type):
             str(row[1]),
             result_type))
     print("")
+
 
 if __name__ == '__main__':
     question1 = "What are the most popular three articles of all time?"
